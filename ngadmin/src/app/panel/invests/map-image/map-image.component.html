@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-6">
+    <img [src]="apiUrl+mapImage?.image" class="img-fluid" *ngIf="!croppedImage && mapImage?.image">
+    <img [src]="croppedImage" class="img-fluid" *ngIf="croppedImage">
+    <button type="button" class="btn btn-warning" (click)="openEdit('image')">
+      <i class="fas fa-image"></i>
+    </button>
+    <button type="button" class="btn btn-success" (click)="backBasePhoto('image')">
+      <i class="fas fa-redo"></i>
+    </button>
+  </div>
+  <div class="col-md-6">
+    <img [src]="apiUrl+mapImage?.imageBig" class="img-fluid" *ngIf="!croppedImageBig &&  mapImage?.imageBig">
+    <img [src]="croppedImageBig" class="img-fluid" *ngIf="croppedImageBig">
+    <button type="button" class="btn btn-warning" (click)="openEdit('imageBig')">
+      <i class="fas fa-image"></i>
+    </button>
+    <button type="button" class="btn btn-success" (click)="backBasePhoto('imageBig')">
+      <i class="fas fa-redo"></i>
+    </button>
+  </div>
+</div>
+<ng-template #imagePopup></ng-template>

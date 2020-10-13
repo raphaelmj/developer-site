@@ -1,0 +1,22 @@
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-lg btn-primary" (click)="addContact()">
+      Dodaj <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-6" id="sortContacts">
+    <div class="row" *ngFor="let c of contacts">
+      <div class="col-md-12">
+        <app-contact-row [contact]="c" (emitEdit)="editContact($event)" (emitRemove)="startRemoveContact($event)">
+        </app-contact-row>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <ng-template #editView></ng-template>
+  </div>
+</div>

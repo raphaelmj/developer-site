@@ -1,0 +1,23 @@
+<img [src]="apiUrl+slide.image" class="img-fluid" *ngIf="!croppedImage">
+<img [src]="croppedImage" class="img-fluid" *ngIf="croppedImage">
+<div class="row beam">
+  <div class="col-lg-4">
+    <button mat-raised-button color="primary" (click)="editImage(slide)">Zmień zdjęcie</button>
+  </div>
+  <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-slide-toggle class="example-margin" [color]="'accent'" [checked]="slide.status"
+          (change)="changeSlideShow($event,slide)">
+          Widoczny
+        </mat-slide-toggle>
+      </div>
+      <div class="col-lg-6">
+        <button type="button" class="btn btn-danger" (click)="startRemoveSlide()">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #editCloud></ng-template>

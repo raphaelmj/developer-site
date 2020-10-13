@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+    <h4>Edycja</h4>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-12">
+    <form [formGroup]="contactForm" (submit)="updateContact()">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Imię nazwisko" formControlName="name"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Stanowisko" formControlName="who"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Imię nazwisko" formControlName="phone"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Stanowisko" formControlName="email"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <mat-slide-toggle formControlName="status">
+            Widoczny
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button class="full-width" type="button" mat-raised-button (click)="closeEdit()">Zamknij</button>
+        </div>
+        <div class="col-md-6">
+          <button class="full-width" mat-raised-button color="primary">Zapisz</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

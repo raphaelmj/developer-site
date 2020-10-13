@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="pointForm" (submit)="savePointData()">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Nazwa miasta" formControlName="name"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Pozycja od lewej punktu" formControlName="left">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Pozycja od góry punktu" formControlName="top">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Pozycja od lewej nazwy miasta" formControlName="cityLeft">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Pozycja od góry nazwy miasta" formControlName="cityTop">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="text-muted">Status inwestycji</div>
+          <mat-radio-group aria-label="Status inwestycji" formControlName="status">
+            <mat-radio-button value="plan-invest">planowana</mat-radio-button>
+            <mat-radio-button value="open-invest">otwarta</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-md-6">
+          <div class="text-muted">Wielkość punktu</div>
+          <mat-radio-group aria-label="Status inwestycji" formControlName="size">
+            <mat-radio-button value="small">mały</mat-radio-button>
+            <mat-radio-button value="big">duży</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-muted">Widoczność</div>
+          <mat-slide-toggle [checked]="point.isShow" formControlName="isShow">
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <button class="full-width" mat-raised-button color="primary">Zapisz</button>
+        </div>
+        <div class="col-md-5">
+          <button class="full-width" mat-raised-button (click)="resetToInit()" type="button">Przywróć - jeżeli nie
+            zapisane</button>
+        </div>
+        <div class="col-md-2">
+          <button class="full-width" mat-raised-button (click)="closeEdit()" type="button">Zamknij</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

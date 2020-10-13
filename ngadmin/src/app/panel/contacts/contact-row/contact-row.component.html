@@ -1,0 +1,40 @@
+<div class="cnt-row" [ngClass]="{'as-first': contact.asFirst}">
+  <div class="row row-contact">
+    <div class="col-md-6">
+      <div>
+        <h3>{{contact.name}}</h3>
+        <p>
+          <span>{{contact.who}}</span><br />
+          <span>{{contact.email}}</span><br />
+          <strong>{{contact.phone}}</strong>
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-slide-toggle [checked]="contact.status" (change)="changeStatus($event)">
+            Widoczny
+          </mat-slide-toggle>
+        </div>
+        <div class="col-md-6 edit-btn-cnt">
+          <button mat-raised-button color="primary" (click)="editContact()">Edytuj</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-4 col-as-first">
+      <!-- {{contact.status}} -->
+      <button type="button" class="start-btn as-first-btn-none" *ngIf="!contact.asFirst" (click)="changeAsFirst(true)">
+        <i class="far fa-star"></i>
+      </button>
+      <button type="button" class="start-btn as-first-btn" *ngIf="contact.asFirst" (click)="changeAsFirst(false)">
+        <i class="fas fa-star"></i>
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-danger" type="button" (click)="removeContact()">
+        <i class="fas fa-minus"></i>
+      </button>
+    </div>
+  </div>
+
+</div>

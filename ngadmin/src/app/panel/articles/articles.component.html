@@ -1,0 +1,19 @@
+<hr>
+<div class="row">
+  <div class="col-md-4">
+    <div class="row" *ngFor="let art of articles">
+      <div class="col-md-8">
+        <h4>{{art.title}}</h4>
+      </div>
+      <div class="col-md-2">
+        <button mat-raised-button color="primary" (click)="openEditArticle(art)">Edytuj</button>
+      </div>
+      <div class="col-md-12">
+        <hr>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <ng-template #editScreen></ng-template>
+  </div>
+</div>

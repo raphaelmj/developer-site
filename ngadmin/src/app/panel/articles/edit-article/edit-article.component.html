@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="articleForm" (submit)="saveArticle()">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Tytuł" formControlName="title">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          Selector: <h4><span class="badge badge-primary">{{article.alias}}</span></h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          Typ:
+          <span class="badge badge-success" *ngIf="article.contentType=='single'">Text jednokolumnowy</span>
+          <span class="badge badge-success" *ngIf="article.contentType=='double'">Text dwukolumnowy</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Jedno kolumnowy text</h4>
+          <ckeditor formControlName="singleContent" [config]="ckEditorConfig"></ckeditor>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Lewa kolumna textu</h4>
+          <ckeditor formControlName="textLeft" [config]="ckEditorConfig"></ckeditor>
+        </div>
+        <div class="col-md-6">
+          <h4>Prawa kolumna textu</h4>
+          <ckeditor formControlName="textRight" [config]="ckEditorConfig"></ckeditor>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row" *ngIf="article.customData">
+        <div class="col-md-12">
+          <div class="row" formGroupName="customData">
+            <div class="col-md-12">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Tytuł" formControlName="title">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Pierwszy wiersz" formControlName="firstRow">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Drugi wiersz" formControlName="secondRow">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Link" formControlName="link">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="article.customData">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-lg d-block w-100 btn-save">
+            Zapisz
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

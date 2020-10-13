@@ -1,0 +1,86 @@
+script(src='/js/jquery-3.3.1.min.js')
+script(src="/js/photoswipe.min.js")
+script(src="/js/photoswipe-ui-default.min.js")
+script(src="/js/gallery.js")
+script(src='/js/lazy-images.js')
+script(src='/angular/angular.min.js')
+//- script(src='/angular/angular-route.min.js')
+script(src='/js/angular-scroll.min.js')
+script(src='/js/glide.js')
+script(src="/angular/angular-cookies.min.js")
+script(src="/angular/angular-sanitize.min.js")
+script(src="/angular/angular-ismobile.min.js")
+//- script(src="/angular/angular-touch.min.js")
+script(src="/controllers/default.controller.js")
+script.
+    /*
+    const ham = document.querySelector(".ham");
+    const ham2 = document.querySelector("#ham2");
+    const ele = document.querySelector(".menu2");
+    ele.style.top = "-200vh";
+    let licznik = 0;
+    ham.onclick = function() {
+    var wew = function() {
+    if (licznik == 0) {
+    licznik = 1;
+    ele.style.top = "0px";
+    } else {
+    licznik = 0;
+    ele.style.top = "-150vh";
+    }
+    }
+    wew();
+    }
+    ham2.onclick = function(){
+    licznik = 0;
+    ele.style.top = "-150vh";
+    }
+    */
+    const ham = document.querySelector("#ham1");
+    const ele = document.querySelector(".menu2");
+    const pasekCommer = document.getElementById('pasekCommer')
+    ele.style.top = "-150vh";
+    let licznik = 0;
+    ham.onclick = function() {
+        var wew = function() {
+                if (licznik == 0) {
+                    licznik = 1;
+                    ele.style.top = "75px";
+                    ele.classList.add('open-m')
+                    if(pasekCommer){
+                        pasekCommer.style.display = 'none'
+                    }
+                } else {
+                    licznik = 0;
+                    ele.style.top = "-150vh";
+                    ele.classList.remove('open-m')
+                    if(pasekCommer){
+                        pasekCommer.style.display = 'flex'
+                    }
+                }
+            }
+            wew();
+        }
+    ele.onclick = function() {
+        var wew = function() {
+                if (licznik == 0) {
+                    licznik = 1;
+                    ele.style.top = "75px";
+                    ele.classList.add('open-m')
+                    if(pasekCommer){
+                        pasekCommer.style.display = 'none'
+                    }
+                } else {
+                    licznik = 0;
+                    ele.style.top = "-150vh";
+                    ele.classList.remove('open-m')
+                    if(pasekCommer){
+                        pasekCommer.style.display = 'flex'
+                    }
+                }
+            }
+            wew();
+        }
+
+    
+    

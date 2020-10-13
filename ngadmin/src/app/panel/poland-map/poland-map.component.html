@@ -1,0 +1,95 @@
+<div class="container-map-edit">
+  <div class="overloading-save" *ngIf="isSaving">
+    <mat-progress-spinner class="example-margin" [color]="'primary'" [mode]="'indeterminate'" [value]="50">
+    </mat-progress-spinner>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-xl-5">
+      <hr>
+      <ng-template #editView></ng-template>
+    </div>
+    <div class="col-md-12 col-xl-7">
+      <app-map-view [points]="points"></app-map-view>
+    </div>
+  </div>
+  <!-- <app-map-view [points]="points"></app-map-view> -->
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary btn-lg" (click)="addPointShow()">
+        <i class="fas fa-plus"></i> Dodaj punkt
+      </button>
+    </div>
+    <div class="col-md-12">
+      <hr>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div *ngFor="let point of points;let j=index" class="col-lg-12">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 [innerHtml]="point.name"></h4>
+            </div>
+            <div class="col-md-1">
+              <mat-slide-toggle [checked]="point.isShow" (change)="changePointShow($event,j)">
+              </mat-slide-toggle>
+            </div>
+            <div class="col-md-3">
+              <button mat-raised-button color="primary" (click)="showEditPoint(point)">Edytuj punkt</button>
+            </div>
+            <!-- <div class="col-md-5" *ngIf="point.type=='single'">
+              <div class="row">
+                <div class="col-md-6">
+                  {{point.child.name}}
+                </div>
+                <div class="col-md-6">
+                  <button mat-raised-button (click)="showEditCloud(point,null,false)">Edytuj chmurę</button>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-md-4" *ngIf="point.type=='collection'">
+              <div *ngFor="let cs of point.childs;let i = index" class="row row-point"
+                [ngClass]="{'open-invest': cs.status=='open-invest', 'plan-invest':cs.status=='plan-invest'}">
+                <div class="col-md-6 col-name">
+                  <h5>{{cs.name}}</h5>
+                  <span [innerHtml]="cs.address"></span>
+                </div>
+                <div class="col-md-6">
+                  <button mat-raised-button (click)="showEditCloud(point,i,true)">Edytuj chmurę</button>
+                  <button type="button" class="btn btn-danger" (click)="removePointCloud(point,i)">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+                <div class="col-md-12">
+                  <br>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 offset-md-6">
+                  <button type="button" class="btn btn-primary" (click)="addCloudShow(point,j)">
+                    <i class="fas fa-plus"></i> Dodaj chumrę
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-1">
+              <button type="button" class="btn btn-danger btn-lg" (click)="removePoint(point)">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- <div class="col-md-7">
+      <ng-template #editView></ng-template>
+    </div> -->
+  </div>
+</div>

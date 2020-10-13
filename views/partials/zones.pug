@@ -1,0 +1,62 @@
+if(invest.movie || zones)
+    if(zones)
+        if(zones.length)
+            - var isZone=true
+    if(invest.movie)        
+        if(invest.movie.length>0)
+            - var isMovie=true
+    if(isZone || isMovie)
+        div.borderTop
+        div(id="strefa")
+        div.grid37
+            div.nag
+                h3(style="color:#444") STREFY ZASIĘGU
+            div    
+if(zones && zones!='')
+    if(zones.length>0)      
+        each inv in zones
+            if zones != ""
+                div.grid342
+                    div
+                        div
+                            -var wl = inv.details
+                            each wl2 in wl
+                                -var ty = wl2.title
+                                h3(style="color:#444") #{ty}
+                                -var drugi = wl2.data
+                                div.box
+                                    ul
+                                        each zz in drugi
+                                            li
+                                                -var la = zz.label
+                                                    strong #{la}
+                                                -var va = zz.value
+                                                    span #{va}     
+                        if(inv.showFile)                                                   
+                            -var planLink = inv.file
+                            div.alignRight
+                                a(href=""+planLink target="_blank")
+                                    img.redPobierz(src="images/buttonPobierzPlanStrefa.jpg")
+                    div                            
+                    div.aR.swp-gallery
+                        -var ob = inv.image
+                        figure.swp-gal-col(itemprop='associatedMedia' itemscope='' itemtype='http://schema.org/ImageObject')
+                            a.thumbnail(href=inv.image itemprop='contentUrl' data-size=inv.sizeString)
+                                img.img-fluid.image-thumb(src=inv.image)
+        //- if(zones && invest.movie)
+        //-     if(invest.movie.length>0) 
+        //-         div.grid37
+        //-             div.nag
+        //-             div.movies-view 
+        //-                 each m in invest.movie
+        //-                     .movie-cnt
+        //-                         iframe(width='100%' style="width:100%" src='https://www.youtube.com/embed/'+m.ytId frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+if(invest.movie)
+    if(invest.movie.length>0) 
+        div.grid342
+            div.nag
+            div
+            div.movies-view.aR   
+                each m in invest.movie
+                    .movie-cnt
+                        iframe(width='100%' style="width:100%" src='https://www.youtube.com/embed/'+m.ytId frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')

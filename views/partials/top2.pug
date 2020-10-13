@@ -1,0 +1,35 @@
+.top
+    .left-arrow-back
+        a(href="#" onClick="event.preventDefault();history.back()")
+            img(src="/img/strzalka_nawigacja_white.svg")
+    .kontenerTop
+        div
+            a(href="/")
+                img(src='/images/logo.png' id="logo")
+        .ham
+            img(src="/images/ham1.svg" id="ham1")
+
+        div
+            ul#mainMenu
+                li
+                    a(href='/#onparku' du-smooth-scroll du-scrollspy) O N-PARKACH
+                li
+                    a(href='/#lokalizacje' du-smooth-scroll du-scrollspy) LOKALIZACJE
+                li
+                    a(href='/#warto' du-smooth-scroll du-scrollspy) Z N-PARKIEM warto
+                li
+                    a(href='#') WYBIERZ N-PARK
+                    ul.sub-menu
+                        each inv in invests
+                            li(class=inv.status)
+                                a(href="/"+inv.slug)
+                                    span
+                                        | #{inv.mainName} 
+                                        | #{inv.city}
+                                        if(inv.id==13 || inv.id==16 || inv.id==15 || inv.id==10)
+                                            span.address    #{inv.address}
+                                    if(inv.status=='plan-invest')
+                                        span.is-plan 
+                                            | - INWESTYCJA PLANOWANA  
+                li
+                    a(href='/#kontakt' du-smooth-scroll du-scrollspy) KONTAKT

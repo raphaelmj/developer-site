@@ -1,0 +1,57 @@
+mixin date_string(date=new Date())
+    - var months = ['Stycznia','Lutego','Marca', 'Kwietnia', 'Maja', 'Czerwca','Lipca','Sierpnia','Września','Października','Listopada','Grudnia']
+    - var d = date.getDate()
+    - var m = date.getMonth()
+    - var y = date.getFullYear()
+    div
+        if(d>9)
+            | #{d}&nbsp;
+        else
+            | #{d}&nbsp; 
+
+        | #{months[m]}&nbsp;  
+        | #{y}       
+
+
+mixin pagination(offset,limit,total,current=1,path)
+    - var pags = []
+    - var totalPags = Math.ceil(total/limit);
+    - for(var i=0;i<totalPags;i++)
+        - if(current==(i+1))
+            - pags.push({nr:(i+1),active:true})
+        - else
+            - pags.push({nr:(i+1),active:false})   
+    if(total>limit)
+        ul.pagination
+            if(current!=1)
+                li
+                    a(href=path+"?page="+(parseInt(current)-1)) <<
+            each p in pags
+
+                li(class=(p.active)?"active":"") 
+                    a(href=path+"?page="+p.nr) #{p.nr}
+
+            if(current!=totalPags)
+                li
+                    a(href=path+"?page="+(parseInt(current)+1)) >>
+        
+
+mixin make_bread_link_by_type(data)
+    case data.type
+        when 'link'
+            a(href='/'+data.d.path) #{data.d.title}
+        when 'category'
+            a(href='/'+data.d.path) #{data.d.name}
+        when 'article'
+            a(href='/'+data.d.alias) #{data.d.title}
+    
+
+    
+mixin make_bread_name(data)
+    case data.type
+        when 'link'
+            | #{data.d.title}
+        when 'category'
+            | #{data.d.name}
+        when 'article'
+            | #{data.d.title}

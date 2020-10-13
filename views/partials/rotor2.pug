@@ -1,0 +1,30 @@
+script.
+    var slidesArr = !{JSON.stringify(slides)}           
+.rotor2#rotorId(ng-controller="RotorController" ng-model="rotorData" ng-init="rotorData={how_many:"+slides.length+",now:0,next:1};initRotor()")
+    img.img-full(src="/images/transp.png")
+    div.screen
+        each s,i in slides
+            div.slide(class="slide-"+i id="sl"+i)
+            style(type="text/css").
+                #sl#{i}{
+                    background:url(#{s.image}) no-repeat;
+                    background-size:cover;
+                    background-position:top center;
+                }
+                @media (orientation:portrait) and (max-width:991.98px) {
+                    #sl#{i}{
+                        background-size:contain;
+                    }
+                }
+
+                @media (max-width:991.98px) {
+                    #sl#{i}{
+                        background-size:contain;
+                    }
+                }
+
+    div.napis2
+        img(src='/images/napis.png')
+
+div.napis-mobile        
+    img(src='/images/napis.png' class="img-fluid")

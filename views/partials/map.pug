@@ -1,0 +1,124 @@
+.container-map-view(ng-controller='AboutPolandMapsController')
+  .inside-cnt 
+    .map-left
+      h2.title-map Lokalizacje inwestycji
+      script.
+        var mapPolandData = !{JSON.stringify(poland)}
+      .cont-maps
+        .main_maps_about
+          .row-map-mobile.poland
+            .col-map
+              img.img-responsive(src='/images/mapa_mobile.png' alt='' class="img-fluid")
+              
+          .row-map.row-poland(ng-model='data' ng-init="data='';initData()")
+            .col-map
+              each c in poland
+                h3.city(style="left: "+c.cityLeft+";top:"+c.cityTop) !{c.name}
+              .legend-cont
+                .legend-row
+                  .legend-el
+                    .point-legend.open-l
+                    .desc-legend
+                      | obiekty otwarte
+                  .legend-el
+                    .point-legend.plan-l
+                    .desc-legend
+                      | inwestycje planowane
+              img.img-responsive(src='/images/poland_map.svg' ng-click='hideAll()')
+              each p,i in poland
+                  if(p.type=='single')
+                      .point-invest(class=p.status+" "+p.size style="left: "+p.left+";top:"+p.top)
+                      if(p.child.openTo=='top')
+                        .cloud(class="hidden-cloud c-"+p.status+" open-to-"+p.child.openTo+" [[classes["+i+"].zIndexMore]]" style="left: "+p.child.cloudLeft+";top:"+p.child.cloudTopBottom ng-class="classes["+i+"].visibleCloud")
+                          h5 !{p.child.name}
+                          .address-cloud.small-cloud(ng-class="classes["+i+"].sizeCloud") !{p.child.address}
+                          a(href=p.child.url target="_blank" ng-mouseover="showFullCloud("+i+")" ng-mouseleave="hideFullCloud("+i+")")
+                      else
+                        .cloud(class="hidden-cloud c-"+p.status+" open-to-"+p.child.openTo+" [[classes["+i+"].zIndexMore]]" style="left: "+p.child.cloudLeft+";bottom:"+p.child.cloudTopBottom ng-class="classes["+i+"].visibleCloud")
+                          h5 !{p.child.name}
+                          .address-cloud.small-cloud(ng-class="classes["+i+"].sizeCloud") !{p.child.address}
+                          a(href=p.child.url target="_blank" ng-mouseover="showFullCloud("+i+")" ng-mouseleave="hideFullCloud("+i+")")
+                  else
+                    //- - var cloudsString = []
+                    //- - p.childs.forEach(function(ck,j){
+                    //- -   cloudsString.push(ck.key)
+                    //- - })
+                    //- - cloudsString = cloudsString.join(',') 
+                    .point-invest(class=p.status+" "+p.size style="left: "+p.left+";top:"+p.top ng-click="showClouds('"+cloudsString+"',"+p.id+")")
+                    each c,j in p.childs
+                      if(c.openTo=='top')
+                        if(c.isShow)
+                          .cloud(class="hidden-cloud c-"+c.status+" open-to-"+c.openTo+" [[classes["+i+"].clouds["+j+"].zIndexMore]]" style="left: "+c.cloudLeft+";top:"+c.cloudTopBottom ng-class="classes["+i+"].clouds["+j+"].visibleCloud")
+                            h5 !{c.name}
+                            .address-cloud.small-cloud(ng-class="classes["+i+"].clouds["+j+"].sizeCloud") !{c.address}
+                            a(href=c.url target="_blank" ng-mouseover="showFullClouds("+j+","+i+")" ng-mouseleave="hideFullClouds("+j+","+i+")")
+                      else
+                        if(c.isShow)
+                          .cloud(class="hidden-cloud c-"+c.status+" open-to-"+c.openTo+" [[classes['"+i+"'].clouds["+j+"].zIndexMore]]" style="left: "+c.cloudLeft+";bottom:"+c.cloudTopBottom ng-class="classes["+i+"].clouds["+j+"].visibleCloud")
+                            h5 !{c.name}
+                            .address-cloud.small-cloud(ng-class="classes["+i+"].clouds["+j+"].sizeCloud") !{c.address}
+                            a(href=c.url target="_blank" ng-mouseover="showFullClouds('"+j+"','"+i+"')" ng-mouseleave="hideFullClouds('"+j+"','"+i+"')")
+    .icons-right
+      .data-cloud(ng-class="showInfo" ng-init="showInfo='hidden-info'")
+        .row-inside-cloud
+          .col-inside
+            .horizont-img 
+              img(src="[[invest.horizontImage]]" class="img-fluid")
+            .beam-pink-row
+              .line
+            .row-data-txt
+              .col-label
+                span.info-l Nazwa:
+              .col-text
+                span.info-c [[invest.mainName]]
+            .row-data-txt
+              .col-label
+                span.info-l Lokalizacja:
+              .col-text
+                span.info-c [[invest.city]]
+            .row-data-txt
+              .col-label
+                span.info-l Adres:
+              .col-text
+                span.info-c(ng-bind-html="invest.address")
+            .row-data-txt
+              .col-label
+                span.info-l Powierzchnia najmu:
+              .col-text
+                span.info-c(ng-bind-html="invest.areaSize")
+            .row-data-txt
+              .col-label
+                span.info-l Liczba miejsc parkingowych:
+              .col-text
+                span.info-c [[invest.parkingAreaSize]]
+            .row-data-txt
+              .col-label
+                span.info-l Data otwarcia:
+              .col-text
+                span.info-c [[invest.openDate]]
+            .row-data-txt
+              .col-label(ng-if="invest.rentiers && invest.rentiers!=''")
+                span.info-l Główni najemcy:
+              .col-text
+                span.info-c(ng-if="invest.rentiers && invest.rentiers!=''") [[invest.rentiers]]
+      .icons-view(ng-class="hiddenIcons" ng-init="hiddenIcons=''")
+        include ./ikony
+.container-map-view      
+  .row-map-mobile-list.poland
+    .col-full-list
+      .head-view
+        h2 Obiekty otwarte:
+      .elements-view
+        each inv in groups.open
+          .ev-element.open-invest
+            h5 #{inv.name}
+            .desc-address !{inv.address}
+            a(href=inv.url target='_blank')
+      .head-view
+        h2 Inwestycje planowane:
+      .elements-view
+        each inv in groups.plan
+          .ev-element.plan-invest
+            h5 #{inv.name}
+            .desc-address !{inv.address}
+            a(href=inv.url target='_blank')

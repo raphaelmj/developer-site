@@ -1,0 +1,62 @@
+hr.separator {
+  border-top: 24px solid rgba(0, 0, 0, .1);
+}
+
+.plan-rel-cnt {
+  position: relative;
+
+  .plan-padding-cnt {}
+}
+
+.now-rel {
+  position: static;
+}
+
+.row.row-relative.as-zone {
+  border: 2px solid #ff0000;
+}
+
+.row.row-relative.as-zone::before {
+  content: 'Strefa zasięgu';
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ff0000;
+  ;
+}
+
+.row.row-relative {
+  position: relative;
+
+
+  @media (max-width:767.98px) {
+    padding-bottom: 64px;
+  }
+
+  .show-file-abs.alert {
+    position: absolute;
+    z-index: 33;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    text-align: center;
+    margin: 0;
+  }
+
+  .show-file-abs.alert.zone {
+    position: absolute;
+    z-index: 33;
+    bottom: 60px;
+    right: 0;
+    width: 50%;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.col-pdfs {
+  padding-bottom: 100px;
+}

@@ -1,0 +1,288 @@
+html(ng-app="app")
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        meta(http-equiv='X-UA-Compatible' content='ie=edge')
+        if(invest.metaDescription)
+            meta(name="description" content=invest.metaDescription)
+        if(invest.metaKeywords) 
+            meta(name="keywords" content=invest.metaKeywords)
+        include ../partials/styles.pug
+        title N-Park
+            if(invest.city && invest.city!='')
+                |  - #{invest.city}
+            
+    body
+        include ../partials/top2.pug
+        include ../partials/menu2.pug 
+        div.topGray
+            div(style="margin-left:10%")
+                div.menuInwestycja
+                    if(invest.plans)
+                        if(invest.plans.length>0)      
+                            li
+                                a(href="#plany" du-smooth-scroll du-scrollspy offset="160")
+                                    | Plany
+                    if (zones && zones!='')
+                        if(zones.length>0)
+                            li
+                                a(href="#strefa" du-smooth-scroll du-scrollspy offset="160")
+                                    | strefa zasięgu
+                    if (invest.gallery && invest.gallery!='')
+                        if(invest.gallery.length>0)
+                            li
+                                a(href="#galeria" du-smooth-scroll du-scrollspy offset="160")
+                                    | galeria
+                    li
+                        a(href="#komer" du-smooth-scroll du-scrollspy offset="160")
+                            | wynajem                                                                                                                                          
+
+        section(id="opis").widok1.section-widok
+            .kontener
+                .grid342.daneInv
+                    div.alignRight
+                        div.naglowekInvestycji
+                            | #{invest.mainName} #{invest.city}
+                            br
+                        span.invest-address #{invest.address}
+                        //- p
+                        //-     | Nazwa:
+                            
+                        //-     strong #{invest.projectName}
+                        //- p   
+                        //-     | Lokalizacja:
+                            
+                        //-     strong  #{invest.city}
+                        //- p
+                        //-     | Adres:
+                            
+                        //-     strong #{invest.address}
+                        if(invest.areaSize && invest.areaSize!='')   
+                            p
+                                | Powierzchnia najmu:
+                                
+                                strong !{invest.areaSize}
+                        if(invest.parkingAreaSize && invest.parkingAreaSize!='')
+                            p
+                                | Liczba miejsc parkingowych:
+                                
+                                strong !{invest.parkingAreaSize}
+                        if(invest.openDate && invest.openDate!='')    
+                            p
+                                | Data otwarcia:
+                                
+                                strong !{invest.openDate}
+                        if(invest.rentiers && invest.rentiers!='')
+                            p
+                                | Główni najemcy:
+                            
+                            strong !{invest.rentiers}
+                        if(invest.siteLink && invest.siteLink!='')
+                            if(invest.siteLink.link && invest.siteLink.name)
+                                p
+                                    | Zapraszamy na stronę www
+                                p
+
+                                    -var url = invest.siteLink.link
+                                    a.butRed(href= "" +url target="_blank" style="text-decoration: none") #{invest.siteLink.name}
+
+
+                    div  
+                    div
+                        if(invest.headerImage && invest.headerImage!='')
+                            if(invest.headerImage.image)
+                                -var obrazek = invest.headerImage.image
+                                img.img-full(src= "" +obrazek)
+                        div.grid55gap
+                            div
+                                | !{invest.textLeft}
+                            div
+                                | !{invest.textRight}
+
+                       
+
+                include ../partials/plans.pug
+                //- if(zones && zones!='')
+                //-     if(zones.length>0) 
+                //-             div.borderTop
+                include ../partials/zones.pug
+                //- if(invest.plans && invest.plans!='')
+                    if(invest.plans.length>0) 
+                            div.borderTop
+                    if(invest.plans && invest.plans!='')
+                        if(invest.plans.length>0) 
+                            div.grid37
+                                div.nag
+                                    h3(style="color:#444"  id="plany") PLANY
+                                div         
+                            each inv in invest.plans
+                                if inv.plans != ""
+                                    div.grid342
+                                        div
+                                            div
+                                                -var wl = inv.details
+                                                each wl2 in wl
+                                                    -var ty = wl2.title
+                                                    h3(style="color:#444") #{ty}
+                                                    -var drugi = wl2.data
+                                                    div.box
+                                                        ul
+                                                            each zz in drugi
+                                                                li
+                                                                    -var la = zz.label
+                                                                        strong #{la}
+                                                                    -var va = zz.value
+                                                                        span #{va}     
+                                            if(inv.showFile)                                                   
+                                                -var planLink = inv.file
+                                                div.alignRight
+                                                    a(href=""+planLink target="_blank")
+                                                        img.redPobierz(src="images/buttonPobierzPlan.jpg")
+                                        div                            
+                                        div.aR.swp-gallery
+                                            -var ob = inv.image
+                                            figure.swp-gal-col(itemprop='associatedMedia' itemscope='' itemtype='http://schema.org/ImageObject')
+                                                a.thumbnail(href=inv.image itemprop='contentUrl' data-size=inv.sizeString)
+                                                    img.img-fluid.image-thumb(src=inv.image)
+                if (invest.map && invest.map!='')
+                    if(invest.map.image)
+                        div.borderTop
+                        div.grid342(style="padding:1em 0" id="lokalizacja")
+                            .nag
+                                h3 Lokalizacja
+                            div    
+                            div.swp-gallery
+                                if(invest.map)
+                                    -var mapa = invest.map.image
+                                    figure.swp-gal-col(itemprop='associatedMedia' itemscope='' itemtype='http://schema.org/ImageObject')
+                                        a.thumbnail(href=invest.map.imageBig itemprop='contentUrl' data-size=invest.map.sizeString)
+                                            img.img-fluid.image-thumb(src=mapa)
+                        div
+                    
+                //- if (invest.zone && zone!='')
+                    if(invest.zone.image)
+                        div.borderTop
+                        div.grid37(style="padding:1em 0"  id="strefa")
+                            .nag(style="display:block")
+                                h3 STREFA ZASIĘGU
+                                -var urlPDF = invest.zone.pdf
+                                div(style="text-align:right")
+                                    if(invest.zone.showFile)
+                                        a(href=""+urlPDF target="_blank")
+                                            img.redPobierz(src="images/buttonPobierzPDF.jpg")        
+                            div.swp-gallery
+                                figure.swp-gal-col(itemprop='associatedMedia' itemscope='' itemtype='http://schema.org/ImageObject')
+                                    a.thumbnail(href=invest.zone.image itemprop='contentUrl' data-size=invest.zone.sizeString)
+                            
+                                        img.img-fluid.image-thumb(src=invest.zone.image)
+                if(invest.gallery)
+                    if(invest.gallery!='')
+                        div.borderTop
+                
+                    //div.grid37(style="padding:1em 0" id="galeria")
+                        .nag
+                            h3 Galeria
+                        div
+                            .swp-gallery
+                                each gal in invest.gallery
+                                    //- -var pic = gal.image
+                                    //- -var slug = invest.slug
+                                    //- img.img-full(src=""+pic)    
+                                    figure.swp-gal-col(itemprop='associatedMedia' itemscope='' itemtype='http://schema.org/ImageObject')
+                                        a.thumbnail(href=gal.image itemprop='contentUrl' data-size=gal.sizeString)
+                                            img.img-fluid.image-thumb(src=gal.image)
+                                        //- figcaption(itemprop='caption description')
+                if(invest.gallery)
+                    if(invest.gallery!='')
+                        div.grid342(style="padding:1em 0" id="galeria")
+                            div.nag
+                                h3 Galeria
+                            div    
+                            div
+                                div.glide.ekranGalerii
+                                    div.glide__track(data-glide-el="track")
+                                        ul.glide__slides.swp-gallery
+                                            each gal in invest.gallery
+                                                li.glide__slide
+                                                    figure.swp-gal-col(itemprop='associatedMedia' itemscope='' itemtype='http://schema.org/ImageObject')
+                                                        a.thumbnail(href=gal.image itemprop='contentUrl' data-size=gal.sizeString)
+                                                            img.img-fluid.image-thumb(src=gal.image)
+                                    div.glide__bullets(data-glide-el="controls[nav]")
+                                        -var l =0
+                                        each kropki in invest.gallery
+                                            button.glide__bullet(data-glide-dir="= " + l)
+                                            - l += 1
+
+                                    //div.glide__arrows
+                                            button.glide__arrow.glide__arrow--left(data-glide-dir="<") prev
+                                            button.glide__arrow.glide__arrow--right(data-glide-dir=">") next               
+
+                div.borderTop
+                div.grid342(style="padding:1em 0" id="komer")
+                    .nag
+                        h3 WYNAJEM
+                    div    
+                    div
+                        .grid55
+                            each poz in invest.contacts
+                                div
+                                    -var nazwisko = poz.name
+                                    h3 #{nazwisko}
+                                    p
+                                        -var fun = poz.who
+                                        span #{fun}
+                                        br
+                                        -var email = poz.email
+                                        span #{email}
+                                        br
+                                        -var tel = poz.phone
+                                        strong #{tel}
+                if invest.rentiersContacts != ""
+                    div.borderTop
+                    div.grid342(style="padding:1em 0")
+                        .nag
+                            h3 WYNAJEM KRÓTKOTERMINOWY
+                        div    
+                        div
+                            .grid55
+                                each poz2 in invest.rentiersContacts
+                                    div
+                                        -var nazwisko = poz2.name
+                                        h3 #{nazwisko}
+                                        p
+                                            -var fun = poz2.who
+                                            span #{fun}
+                                            br
+                                            -var email = poz2.email
+                                            span #{email}
+                                            br
+                                            -var tel = poz2.phone
+                                            strong #{tel}
+                if(invest.managementContacts != "")
+                    div.borderTop
+                    div.grid342(style="padding:1em 0")
+                        .nag
+                            h3 Zarządzanie
+                        div    
+                        div
+                            .grid55
+                                each poz3 in invest.managementContacts
+                                    div
+                                        -var nazwisko = poz3.name
+                                        h3 #{nazwisko}
+                                        p
+                                            -var fun = poz3.who
+                                            span #{fun}
+                                            br
+                                            -var email = poz3.email
+                                            span #{email}
+                                            br
+                                            -var tel = poz3.phone
+                                            strong #{tel}
+
+    include ../partials/widok22.pug 
+    include ../partials/pasek-bottom.pug 
+    include ../partials/pswp.pug
+    if !isConfirm
+        include ../partials/cookie.pug    
+include ../partials/scripts2.pug

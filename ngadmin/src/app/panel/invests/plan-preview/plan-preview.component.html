@@ -1,0 +1,20 @@
+<div class="row" id="sortGrid">
+  <div class="col-md-4 col-pl" *ngFor="let p of plans;let i = index" [ngClass]="{'as-zone': p.isAsZone}">
+    <div class="row">
+      <div class="col-md-6">
+        <img [src]="apiUrl+p.image" class="img-fluid">
+        <a [href]="apiUrl+p.file" target="_blank">
+          <img [src]="apiUrl+'/images/buttonPobierzPlan.jpg'" alt="" class="img-fluid">
+        </a>
+      </div>
+      <div class="col-md-4">
+        Liczba sekcji tabelki: {{p.details.length}}
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-danger w-100 btn-sm" (click)="removePlan()">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

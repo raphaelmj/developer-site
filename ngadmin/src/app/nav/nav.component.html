@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light" id="navBar" *ngIf="showNav">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/panel']">Start</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/panel/poland-map']">Mapa</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/panel/invests']">Inwestycje</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/panel/rotor']">Rotor</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/panel/articles']">Artykuły</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/panel/contacts']">Kontakty</a>
+      </li>
+
+    </ul>
+  </div>
+  <div class="float-right show-web">
+    <a href="#" (click)="$event.preventDefault();logOut()">
+      Wyloguj
+    </a>
+    &nbsp;&nbsp;
+    <a [href]="apiUrl" target="_blank">
+      Podgląd strony
+    </a>
+  </div>
+
+</nav>

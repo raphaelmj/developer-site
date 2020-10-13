@@ -1,0 +1,19 @@
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-lg btn-primary" (click)="addSlide()">
+      Dodaj <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="row" id="sortSlides">
+      <div class="col-md-6 col-lg-4 col-slide" *ngFor="let s of slides">
+        <app-slide-element [slide]="s" (emitChange)="changeImage($event)"></app-slide-element>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #editCloud></ng-template>

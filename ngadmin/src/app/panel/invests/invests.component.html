@@ -1,0 +1,56 @@
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-lg btn-primary" (click)="addInvest()">
+      Dodaj <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</div>
+<hr>
+<div class="row" id="sortInvest">
+  <div class="col-md-6 col-lg-6 col-xl-4" *ngFor="let inv of invests">
+
+    <div class="invest-element">
+      <div class="row">
+        <div class="col-md-12">
+          <img [src]="apiUrl+inv.headerImage?.image" class="img-fluid" *ngIf="inv.headerImage?.image">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="badge badge-danger">
+            ID: {{inv.id}}
+          </span>
+          <h4>
+            {{inv.mainName}}
+          </h4>
+          <h5>
+            {{inv.city}}
+          </h5>
+          <h6>
+            {{inv.address}}
+          </h6>
+          <mat-slide-toggle class="example-margin" [color]="'accent'" [checked]="inv.isShow"
+            (change)="changeInvestShow($event,inv)">
+            Widoczny
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10">
+          <button mat-raised-button color="primary" (click)="editInvest(inv)">Edytuj</button>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger" (click)="startRemoveInvest(inv)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
+<ng-template #editTemp></ng-template>

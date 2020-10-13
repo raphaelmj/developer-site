@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-6">
+    <img [src]="apiUrl+zone?.image" class="img-fluid" *ngIf="zone?.image">
+    <label for="fileImage">
+      Wybierz obrazek
+      <input type="file" id="file" #fileImage (change)="handleFileInput($event.target.files,'image')" accept="image/*">
+    </label>
+  </div>
+  <div class="col-md-6">
+    <a [href]="apiUrl+zone?.pdf" target="_blank" *ngIf="zone?.pdf">
+      <img [src]="apiUrl+'/images/buttonPobierzPlan.jpg'" alt="">
+    </a>
+    <label for="filePdf">
+      Wybierz pdf
+      <input type="file" id="filePdf" #filePdf (change)="handleFileInput($event.target.files,'pdf')"
+        accept="application/pdf">
+    </label>
+  </div>
+  <div class="col-md-12">
+    <div class="show-file-abs alert alert-warning">
+      <form #f="ngForm">
+        <mat-slide-toggle [color]="'accent'" name="isFile" #isFile [checked]="(zone)?zone.showFile:false"
+          [disabled]="!zone?.pdf" (change)="isFileCahnge($event)">
+          Pokaż pdf przy strefie
+        </mat-slide-toggle>
+      </form>
+    </div>
+    <button type="button" (click)="clearZone()" class="btn btn-danger w-100">Wyczyść strefę (brak strefy)</button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+section.widok2(id="kontakt")
+    .kontener
+        div.grid55gap2
+            div
+                img.logoBottom(src='/images/logoNapollo.png')
+            div
+                | 
+    .kontener
+        div.grid55gap2
+            div
+                | !{articles["kontakt"].singleContent}
+            div
+                -var ob = articles["kontakt"].customData.title
+                    | !{ob}
+                -var ob1 = articles["kontakt"].customData.firstRow
+                -var ob2 = articles["kontakt"].customData.secondRow
+                -var ob3 = articles["kontakt"].customData.link   
+                p 
+                    strong !{ob1}
+                    br
+                    strong !{ob2}
+                p.butGrey
+                    | SPRAWD&Zacute;: 
+                    a.link(href=""+ob3 target="_blank")  NAPOLLO.PL

@@ -1,0 +1,59 @@
+<div class="overshadow" (click)="closeEdit()">
+
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn" (click)="closeEdit()"><i class="fas fa-times"></i></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <div class="row row-form">
+        <div class="col-md-12">
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <h3>Plany</h3>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <button type="button" class="btn btn-primary" (click)="addPlan('first')">
+                <i class="fas fa-plus"></i> Dodaj nowy plan na początku
+              </button>
+
+            </div>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-primary" (click)="addPlan('last')">
+                <i class="fas fa-plus"></i> Dodaj nowy plan na końcu
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <hr>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <app-one-plan-edit *ngFor="let p of plans;let i = index" [plan]="p" [index]="i"
+                (removeEmit)="removePlan($event)"></app-one-plan-edit>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

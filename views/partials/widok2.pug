@@ -1,0 +1,33 @@
+section.widok2(id="kontakt")
+    .kontener
+        div.grid28
+            div(style="padding-bottom:24px")
+                img.img-full(src='/images/logo_bottom.svg')
+
+            div
+                if(articles)
+                    if(articles["kontakt"])
+                        | !{articles["kontakt"].singleContent}
+                        hr
+                        -var ob = articles["kontakt"].customData.title
+                            | !{ob}
+                        -var ob1 = articles["kontakt"].customData.firstRow
+                        -var ob2 = articles["kontakt"].customData.secondRow
+                        -var ob3 = articles["kontakt"].customData.link    
+                        p 
+                            | !{ob1}
+                            br
+                            | !{ob2}
+                        p
+                        |SPRAWDŹ: 
+                        a.linkStopka(href=""+ob3  target="_blank" style="color:#444")  
+                            strong NAPOLLO.PL
+                
+
+
+                //h3.__colorB NAPOLLO
+                //strong    
+                //    | Inwestor i deweloper inwestycji
+                //    br
+                //    | handlowych i mieszkaniowych
+

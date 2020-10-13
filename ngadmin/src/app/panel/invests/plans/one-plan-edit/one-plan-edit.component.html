@@ -1,0 +1,138 @@
+<div class="row row-relative" [ngClass]="{'as-zone': planForm.get('isAsZone').value}">
+  <div class="col-md-6 now-rel">
+    <form [formGroup]="planForm">
+      <div formArrayName="details" *ngFor="let item of planForm.get('details').controls; let i = index;" class="row">
+        <div [formGroupName]="i" class="col-md-11">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Tytul" formControlName="title">
+          </mat-form-field>
+          <mat-radio-group aria-label="Select an option" formControlName="type">
+            <mat-radio-button value="list">Lista</mat-radio-button>
+            <mat-radio-button value="content">Opis</mat-radio-button>
+          </mat-radio-group>
+          <div formArrayName="data"
+            *ngFor="let ditem of planForm.get('details').controls[i].get('data').controls; let j = index;" class="row">
+            <div [formGroupName]="j" class="col-md-7 offset-md-4">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Label" formControlName="label">
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Wartość" formControlName="value">
+              </mat-form-field>
+              <hr>
+            </div>
+            <div class="col-md-1">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeSectionDataElement(i,j)">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-4">
+              <button type="button" class="btn w-100 btn-warning btn-sm" (click)="addPlanSectionDataElement(i)">
+                Dodaj element tabelki
+              </button>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn btn-danger" (click)="removeSection(i)">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <button type="button" class="btn w-100 btn-warning" (click)="addPlanSection()">
+            Dodaj sekcje w tabeli
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+
+      <div class="row" formGroupName="freeArea">
+        <div class="col-md-6">
+          <mat-slide-toggle [color]="'accent'" formControlName="showArea">
+            Pokaż przestrzeń do wynajęcia
+          </mat-slide-toggle>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="przestrzeń (m2)" formControlName="valueArea">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="show-file-abs alert alert-warning">
+        <mat-slide-toggle [color]="'accent'" formControlName="showFile">
+          Pokaż pdf przy planie
+        </mat-slide-toggle>
+      </div>
+      <div class="show-file-abs alert alert-success zone">
+        <mat-slide-toggle [color]="'accent'" formControlName="isAsZone">
+          Jako strefa zasięgu
+        </mat-slide-toggle>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-5 col-pdfs">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="plan-rel-cnt">
+          <div class="plan-padding-cnt">
+            <img [src]="apiUrl+plan.image" alt="" class="img-fluid">
+            <hr>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-12">
+        <label for="fileImage">
+          Wybierz obrazek
+          <input type="file" id="file" #fileImage (change)="handleFileInput($event.target.files,'image')"
+            accept="image/*">
+        </label>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center" *ngIf="plan.file">
+        <a [href]="apiUrl+plan.file" target="_blank">
+          <img [src]="apiUrl+'/images/buttonPobierzPlan.jpg'" alt="">
+        </a>
+        <hr>
+      </div>
+      <div class="col-md-12">
+        <label for="filePdf">
+          Wybierz pdf
+          <input type="file" id="filePdf" #filePdf (change)="handleFileInput($event.target.files,'pdf')"
+            accept="application/pdf">
+        </label>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <button type="button" class="btn btn-danger w-100 btn-sm" (click)="removePlan(i)">
+      <i class="fas fa-minus"></i>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <hr class="separator">
+  </div>
+</div>

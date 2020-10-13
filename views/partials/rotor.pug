@@ -1,0 +1,17 @@
+script.
+    var slds = !{JSON.stringify(slides)}           
+.rotor
+    img.img-full(src="/images/transp.png")
+    div.ekran
+        //- img.nie(src="/images/slider/slider1a.jpg" id="pic1")
+        //- img.nie(src="/images/slider/slider2a.jpg" id="pic2")
+        //- img.nie(src="/images/slider/slider3a.jpg" id="pic3")
+        //- img.nie(src="/images/slider/slider4a.jpg" id="pic4")
+        //- img.nie(src="/images/slider/slider5a.jpg" id="pic5")
+        //- img.nie(src="/images/slider/slider6a.jpg" id="pic6")
+        //- img.nie(src="/images/slider/slider7a.jpg" id="pic7")
+        //- img.nie(src="/images/slider/slider8a.jpg" id="pic8")
+        each s,i in slides
+            img.nie(src=s.image id="pic"+(i+1))
+    div.napis
+        img(src='/images/napis.png')

@@ -1,0 +1,69 @@
+html(ng-app="app")
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    include ../partials/styles.pug
+    title N-Park
+  body(data-offset="100" data-init-view="1")
+    include ../partials/top.pug
+    include ../partials/menu2.pug 
+    include ../partials/rotor2.pug
+  a(name="onparku")      
+    section.widok(id="onparku")
+      .kontener
+        .grid415
+          div  
+          div  
+          div
+            
+        .grid415
+          div
+          .ikony
+            div
+              img(src='/images/ikona0.png')
+              div dogodna lokalizacja,
+                  br
+                  | w całej Polsce
+            div
+
+            div
+              img(src='/images/ikona1.png')
+              div aglomeracje i miasta
+            div
+              img(src='/images/ikona2.png')
+              div najważniejsze kategorie produktów
+            div
+              img(src='/images/ikona3.png')
+              div znane sieci handlowe i popularne marki
+            div
+              img(src='/images/ikona4.png')
+              div wygodne codzienne zakupy
+            div
+              img(src='/images/ikona5.png')
+              div us&lstrok;ugi i gastronomia
+            div
+              img(src='/images/ikona6.png')
+              div parking bezpośrednio przed lokalami handowymi
+          div  
+          .onas
+              h1(style="margin-top:0") !{articles["o-n-park"].title}
+              | !{articles["o-n-park"].singleContent}
+    a(name="lokalizacje")          
+    section.redWidok(id="lokalizacje")
+      include ../partials/map.pug
+      //- include ../partials/ikony.pug
+    a(name="warto")  
+    include ../partials/widok1.pug
+    a(name="kontakt") 
+    include ../partials/widok22.pug
+    //- include ../partials/widok2.pug
+    include ../partials/pasek-bottom.pug 
+    div.pasekRed.button-fixed-right#pasekCommer
+      img(src="images/pinkLewa.png")
+      a(href="/wynajem")
+        | WYNAJEM
+    if !isConfirm
+      include ../partials/cookie.pug  
+include ../partials/scripts.pug
+        

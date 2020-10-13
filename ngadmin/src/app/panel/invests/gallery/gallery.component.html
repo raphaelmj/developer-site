@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12">
+    <ngfFormData [files]="files" [(FormData)]="formData" postName="file"></ngfFormData>
+    <div class="drop-area" ngfDrop selectable="1" multiple="1" [(files)]="files" [(validDrag)]="validComboDrag"
+      [(invalidDrag)]="invalidComboDrag" [ngClass]="{'goodDragClass':validComboDrag, 'badDragClass':invalidComboDrag}">
+      <span class="text-muted">Upuść pliki</span>
+    </div>
+    <button *ngIf="files" class="btn btn-warning d-block w-100" type="button" (click)="uploadFiles(files)">Wyślij
+      pliki</button>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-12">
+    <div class="row">
+      <div *ngFor="let img of filesUF" class="col-md-3">
+        {{ img.name }}
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-12">
+    <div class="row" id="sortGallery">
+      <div class="col-md-2" *ngFor="let img of galleryImages;let i=index">
+
+        <img [src]="apiUrl+img.image" class="img-fluid">
+        <button class="btn btn-danger btn-remove btn-sm w-100" type="button" (click)="removeImage(i)">
+          <i class="fas fa-minus"></i>
+        </button>
+
+
+      </div>
+    </div>
+  </div>
+</div>

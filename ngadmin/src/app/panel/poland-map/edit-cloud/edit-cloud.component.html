@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="cloudForm" (submit)="saveCloudData()">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Nazwa miasta" formControlName="name"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Adres" formControlName="address"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Pozycja od lewej" formControlName="cloudLeft">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Pozycja względem {{cloudForm.get('openTo').value}}"
+              formControlName="cloudTopBottom">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <div class="text-muted">Pozycjonowanie względem</div>
+          <mat-radio-group aria-label="Status inwestycji" formControlName="openTo">
+            <mat-radio-button value="top">top</mat-radio-button>
+            <mat-radio-button value="bottom">bottom</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="text-muted">Status inwestycji</div>
+          <mat-radio-group aria-label="Status inwestycji" formControlName="status">
+            <mat-radio-button value="plan-invest">planowana</mat-radio-button>
+            <mat-radio-button value="open-invest">otwarta</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-md-6">
+          <mat-slide-toggle formControlName="isShow">
+            widoczność
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="selected-invest" *ngIf="invest"
+            [ngClass]="{'c-plan-invest': pointChild.status=='plan-invest','c-open-invest':pointChild.status=='open-invest'}">
+            <h3>{{invest?.mainName}}</h3>
+            <h4>{{invest?.city}}</h4>
+            <p>{{invest?.address}}</p>
+          </div>
+
+        </div>
+        <div class="col-md-12">
+          <hr>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div *ngFor="let inv of invests" class="col-md-3 col-xl-6" [ngClass]="{'d-none': inv.id==invest?.id}">
+              <button type="button" *ngIf="inv.id!=invest?.id" class="invest-btn" (click)="changeInvest(inv)"
+                [ngClass]="{'open-invest': inv.status=='open-invest', 'plan-invest':inv.status=='plan-invest'}">
+                <b>{{inv.mainName}} - {{inv.city}}</b>
+                <p>{{inv.address}}</p>
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <button class="full-width" mat-raised-button color="primary">Zapisz</button>
+        </div>
+        <div class="col-md-5">
+          <button class="full-width" mat-raised-button (click)="resetToInit()" type="button">
+            Przywróć - jeżeli nie
+            zapisane</button>
+        </div>
+        <div class="col-md-2">
+          <button class="full-width" mat-raised-button (click)="closeEdit()" type="button">Zamknij</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

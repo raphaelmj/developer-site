@@ -1,0 +1,43 @@
+html(ng-app="app")
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        meta(http-equiv='X-UA-Compatible' content='ie=edge')
+        include ../partials/styles.pug
+        title N-Park - wynajem
+    body
+        include ../partials/top2.pug
+        include ../partials/menu2.pug 
+        section
+            div.kontener(style="padding-bottom:5em")
+                h2(style="color:#444;font-size:1.4em;padding-top:2em") WYNAJEM
+                div
+                    h3 #{contactMain.name}
+                    p
+                        span #{contactMain.who}
+                        br
+                        span #{contactMain.email}
+                        br
+                        strong #{contactMain.phone}
+                //otherContacts
+                <hr>
+                    div.grid4
+                        each poz in otherContacts
+                            div
+                                -var nazwisko = poz.name
+                                h3 #{nazwisko}
+                                p
+                                -var fun = poz.who
+                                span #{fun}
+                                br
+                                -var email = poz.email
+                                span #{email}
+                                br
+                                -var tel = poz.phone
+                                strong #{tel}
+        include ../partials/widok22.pug
+        //- include ../partials/widok2.pug 
+        include ../partials/pasek-bottom.pug
+        if !isConfirm
+            include ../partials/cookie.pug    
+include ../partials/scripts3.pug

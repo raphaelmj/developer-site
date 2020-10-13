@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-12">
+    <img [src]="apiUrl+image?.image" class="img-fluid" *ngIf="!croppedImage && image?.image">
+    <img [src]="croppedImage" class="img-fluid" *ngIf="croppedImage">
+    <button type="button" class="btn btn-warning" (click)="openEdit()">
+      <i class="fas fa-image"></i>
+    </button>
+    <button type="button" class="btn btn-success" (click)="backBasePhoto()">
+      <i class="fas fa-redo"></i>
+    </button>
+  </div>
+</div>
+<ng-template #imagePopup></ng-template>

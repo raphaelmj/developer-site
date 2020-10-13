@@ -1,0 +1,241 @@
+<div class="cont-maps">
+  <div class="main_maps_about">
+    <div class="row-map row-poland" ng-model="data" ng-init="data='';initData()">
+      <div class="col-map">
+        <span *ngFor="let p of points" class="span-city">
+          <h3 class="city" [ngStyle]="{'left': p.cityLeft,'top':p.cityTop}" *ngIf="p.isShow">
+            <span [innerHtml]="p.name"></span>
+          </h3>
+        </span>
+
+        <!-- <h3 class="city" style="left: 12%;top:36%">Gorzów<br>Wielkopolski</h3>
+        <h3 class="city" style="left: 55%;top:42%">Stara Iwiczna</h3>
+        <h3 class="city" style="left: 39%;top:31%">Gniezno</h3>
+        <h3 class="city" style="left: 39.9%;top:39.6%">Grodzisk Mazowiecki</h3>
+        <h3 class="city" style="left: 31%;top:36.5%">Poznań</h3>
+        <h3 class="city" style="left: 47%;top:72.6%">Czerwionka-Leszczyny</h3>
+        <h3 class="city" style="left: 75%;top:28%">Bielsk Podlaski</h3>
+        <h3 class="city" style="left: 41.9%;top:44.6%">Zgierz</h3>
+        <h3 class="city" style="left: 60.5%;top:30.5%">Ząbki</h3>
+        <h3 class="city" style="left: 30%;top:49.3%">Wrocław</h3>
+        <h3 class="city" style="left: 71%;top:35.5%">Warszawa</h3> -->
+        <!-- <div class="legend-cont">
+          <div class="legend-row">
+            <div class="legend-el">
+              <div class="point-legend open-l"></div>
+              <div class="desc-legend">obiekty otwarte</div>
+            </div>
+            <div class="legend-el">
+              <div class="point-legend plan-l"></div>
+              <div class="desc-legend">inwestycje planowane</div>
+            </div>
+          </div>
+        </div> -->
+        <img class="img-responsive" [src]="apiUrl+'/images/poland_map.svg'" ng-click="hideAll()" />
+        <span *ngFor="let p of points" class="span-point">
+          <div *ngIf="p.size=='small' && p.isShow" class="point-invest small"
+            [ngClass]="{'plan-invest': p.status=='plan-invest','open-invest':p.status=='open-invest'}"
+            [ngStyle]="{'left': p.left,'top':p.top}"></div>
+        </span>
+        <span *ngFor="let p of points" class="span-point">
+          <div *ngIf="p.size=='big' && p.isShow" class="point-invest big"
+            [ngClass]="{'plan-invest': p.status=='plan-invest','open-invest':p.status=='open-invest'}"
+            [ngStyle]="{'left': p.left,'top':p.top}"></div>
+        </span>
+
+        <span *ngFor="let p of points;let x=index">
+
+          <span *ngIf="p.type=='single' && p.isShow">
+            <span *ngIf="p.child.openTo=='top'">
+              <div class="cloud hidden-cloud open-to-top" *ngIf="p.child.isShow"
+                [ngClass]="{'c-plan-invest': p.child.status=='plan-invest','c-open-invest':p.child.status=='open-invest','overshow':cloudSizeBool[x][y]}"
+                [ngStyle]="{'left': p.child.cloudLeft,'top':p.child.cloudTopBottom,'box-sizing::after': 'inherit'}">
+                <h5 [innerHtml]="p.child.name"></h5>
+                <a [href]="apiUrl+p.child.url" target="_blank"></a>
+              </div>
+            </span>
+            <span *ngIf="p.child.openTo=='bottom'">
+              <div class="cloud hidden-cloud open-to-bottom" *ngIf="p.child.isShow"
+                [ngStyle]="{'left': p.child.cloudLeft,'bottom':p.child.cloudTopBottom}"
+                [ngClass]="{'c-plan-invest': p.child.status=='plan-invest','c-open-invest':p.child.status=='open-invest','box-sizing::after': 'inherit !important','box-sizing::before': 'inherit !important'}">
+                <h5 [innerHtml]="p.child.name"></h5>
+                <a [href]="apiUrl+p.child.url" target="_blank"></a>
+              </div>
+            </span>
+
+          </span>
+
+          <span *ngIf="p.type=='collection' && p.isShow">
+
+            <span *ngFor="let cs of p.childs;let y=index">
+              <span *ngIf="cs.openTo=='top'">
+                <div class="cloud hidden-cloud open-to-top" *ngIf="cs.isShow"
+                  [ngClass]="{'c-plan-invest': cs.status=='plan-invest','c-open-invest':cs.status=='open-invest','overshow':cloudSizeBool[x][y]}"
+                  [ngStyle]="{'left': cs.cloudLeft,'top':cs.cloudTopBottom}">
+                  <h5 [innerHtml]="cs.name"></h5>
+                  <div class="address-cloud" [ngClass]="{'small-cloud': !cloudSizeBool[x][y]}">
+                    <span [innerHtml]="cs.address"></span>
+                  </div>
+                  <a [href]="apiUrl+cs.url" target="_blank" (mouseenter)="showFullCloudColl(x,y)"
+                    (mouseleave)="hideFullCloudColl(x,y)"></a>
+
+                </div>
+              </span>
+              <span *ngIf="cs.openTo=='bottom'">
+                <div class="cloud hidden-cloud open-to-bottom" *ngIf="cs.isShow"
+                  [ngClass]="{'c-plan-invest': cs.status=='plan-invest','c-open-invest':cs.status=='open-invest','overshow':cloudSizeBool[x][y]}"
+                  [ngStyle]="{'left': cs.cloudLeft,'bottom':cs.cloudTopBottom}">
+                  <h5 [innerHtml]="cs.name"></h5>
+                  <div class="address-cloud" [ngClass]="{'small-cloud': !cloudSizeBool[x][y]}">
+                    <span [innerHtml]="cs.address"></span>
+                  </div>
+                  <a [href]="apiUrl+cs.url" target="_blank" (mouseenter)="showFullCloudColl(x,y)"
+                    (mouseleave)="hideFullCloudColl(x,y)"></a>
+                </div>
+              </span>
+            </span>
+
+
+            <!-- <div class="cloud hidden-cloud c-plan-invest open-to-bottom" style="left: -3%;bottom:65%">
+              <h5 [innerHtml]="cs.name"></h5>
+              <a href="/n-park-gorzow-wielkopolski-12" target="_blank"></a>
+            </div> -->
+          </span>
+
+        </span>
+
+        <!-- <div class="cloud hidden-cloud c-plan-invest open-to-bottom [[classes[0].zIndexMore]]"
+          style="left: -3%;bottom:65%" ng-class="classes[0].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[0].sizeCloud">ul. Pomorska<br>Gorzów Wielkopolski
+          </div><a href="/n-park-gorzow-wielkopolski-12" target="_blank" ng-mouseover="showFullCloud(0)"
+            ng-mouseleave="hideFullCloud(0)"></a>
+        </div> -->
+
+        <!-- <div class="point-invest plan-invest small" style="left: 12%;top:35%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-plan-invest open-to-bottom [[classes[0].zIndexMore]]"
+          style="left: -3%;bottom:65%" ng-class="classes[0].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[0].sizeCloud">ul. Pomorska<br>Gorzów Wielkopolski
+          </div><a href="/n-park-gorzow-wielkopolski-12" target="_blank" ng-mouseover="showFullCloud(0)"
+            ng-mouseleave="hideFullCloud(0)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest small" style="left: 67%;top:41.5%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-top [[classes[1].zIndexMore]]" style="left: 55%;top:47%"
+          ng-class="classes[1].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[1].sizeCloud">ul.Nowa 4, 4A, 4B <br>Stara Iwiczna
+          </div><a href="/n-park-stara-iwicznapiaseczno-10" target="_blank" ng-mouseover="showFullCloud(1)"
+            ng-mouseleave="hideFullCloud(1)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest small" style="left: 35%;top:34%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes[2].zIndexMore]]"
+          style="left: 34%;bottom:67%" ng-class="classes[2].visibleCloud">
+          <h5>Galeria Piastova</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[2].sizeCloud">ul. Witkowska 1 <br>Gniezno</div><a
+            href="/galeria-piastova-gniezno-1" target="_blank" ng-mouseover="showFullCloud(2)"
+            ng-mouseleave="hideFullCloud(2)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest small" style="left: 62%;top:41%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes[3].zIndexMore]]"
+          style="left: 46%;bottom:58.2%" ng-class="classes[3].visibleCloud">
+          <h5>Galeria Grodova</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[3].sizeCloud">ul. H. Sienkiewicza <br>Grodzisk
+            Mazowiecki</div><a href="/galeria-grodova-grodzisk-mazowiecki-2" target="_blank"
+            ng-mouseover="showFullCloud(3)" ng-mouseleave="hideFullCloud(3)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest big" style="left: 26%;top:38%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes[4].zIndexMore]]"
+          style="left: 15%;bottom:63%" ng-class="classes[4].visibleCloud">
+          <h5>Centrum Promienista</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[4].sizeCloud">ul. Promienista 160 <br>Poznań</div><a
+            href="/centrum-promienista-poznan-9" target="_blank" ng-mouseover="showFullCloud(4)"
+            ng-mouseleave="hideFullCloud(4)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest small" style="left: 43%;top:75%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes[5].zIndexMore]]"
+          style="left: 43%;bottom:27%" ng-class="classes[5].visibleCloud">
+          <h5>Centrum Zakupów</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[5].sizeCloud">ul. Furgoła 6 E <br>Czerwionka
+            Leszczyny</div><a href="/centrum-zakupow-czerwionka-leszczyny-4" target="_blank"
+            ng-mouseover="showFullCloud(5)" ng-mouseleave="hideFullCloud(5)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest small" style="left: 90%;top:32%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes[6].zIndexMore]]"
+          style="left: 74%;bottom:70.5%" ng-class="classes[6].visibleCloud">
+          <h5>Centrum Zakupów</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[6].sizeCloud">ul. J. Piłsudskiego 31 A-B <br>Bielsk
+            Podlaski</div><a href="/centrum-zakupow-bielsk-podlaski-8" target="_blank" ng-mouseover="showFullCloud(6)"
+            ng-mouseleave="hideFullCloud(6)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest small" style="left: 49%;top:47%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-top [[classes[7].zIndexMore]]" style="left: 40%;top:51%"
+          ng-class="classes[7].visibleCloud">
+          <h5>Centrum Zakupów</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[7].sizeCloud">ul. Łódzka 77/79 <br>Zgierz</div><a
+            href="/centrum-zakupow-zgierz-5" target="_blank" ng-mouseover="showFullCloud(7)"
+            ng-mouseleave="hideFullCloud(7)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest small" style="left: 67%;top:33%"></div> -->
+        <!-- <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes[8].zIndexMore]]"
+          style="left: 54%;bottom:68.5%" ng-class="classes[8].visibleCloud">
+          <h5>Centrum Zakupów</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[8].sizeCloud">ul. Reymonta 30 <br>Ząbki</div><a
+            href="/centrum-zakupow-zabki-6" target="_blank" ng-mouseover="showFullCloud(8)"
+            ng-mouseleave="hideFullCloud(8)"></a>
+        </div> -->
+        <!-- <div class="point-invest open-invest big" style="left: 25%;top:51%" ng-click="showClouds('undefined',10)"></div> -->
+        <!-- <div class="cloud hidden-cloud c-plan-invest open-to-top [[classes[9].clouds[0].zIndexMore]]"
+          style="left: 26%;top:55%" ng-class="classes[9].clouds[0].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[9].clouds[0].sizeCloud">Rondo Ułańskie<br>Łany k.
+            Wrocławia</div><a href="n-park-lany-k-wroclawia-7" target="_blank" ng-mouseover="showFullClouds(0,9)"
+            ng-mouseleave="hideFullClouds(0,9)"></a>
+        </div>
+        <div class="cloud hidden-cloud c-plan-invest open-to-bottom [[classes['9'].clouds[1].zIndexMore]]"
+          style="left: 26%;bottom:50%" ng-class="classes[9].clouds[1].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[9].clouds[1].sizeCloud">ul. Opolska/ul. Karwińska
+          </div><a href="n-park-wroclaw-11" target="_blank" ng-mouseover="showFullClouds('1','9')"
+            ng-mouseleave="hideFullClouds('1','9')"></a>
+        </div>
+        <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes['9'].clouds[2].zIndexMore]]"
+          style="left: 10%;bottom:51%" ng-class="classes[9].clouds[2].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[9].clouds[2].sizeCloud">ul. Maślicka / Królewiecka
+            <br>Wrocław</div><a href="n-park-wroclaw-13" target="_blank" ng-mouseover="showFullClouds('2','9')"
+            ng-mouseleave="hideFullClouds('2','9')"></a>
+        </div>
+        <div class="cloud hidden-cloud c-open-invest open-to-top [[classes[9].clouds[3].zIndexMore]]"
+          style="left: 6%;top:50%" ng-class="classes[9].clouds[3].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[9].clouds[3].sizeCloud">ul. Gagarina 27 <br>Wrocław
+          </div><a href="n-park-wroclaw-16" target="_blank" ng-mouseover="showFullClouds(3,9)"
+            ng-mouseleave="hideFullClouds(3,9)"></a>
+        </div>
+        <div class="cloud hidden-cloud c-open-invest open-to-top [[classes[9].clouds[4].zIndexMore]]"
+          style="left: 10%;top:58%" ng-class="classes[9].clouds[4].visibleCloud">
+          <h5>Galaktyka</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[9].clouds[4].sizeCloud">ul. Ślężna 130-134
+            <br>Wrocław</div><a href="galaktyka-park-wroclaw-14" target="_blank" ng-mouseover="showFullClouds(4,9)"
+            ng-mouseleave="hideFullClouds(4,9)"></a>
+        </div>
+        <div class="point-invest open-invest big" style="left: 66%;top:37%" ng-click="showClouds('undefined',11)"></div>
+        <div class="cloud hidden-cloud c-open-invest open-to-bottom [[classes['10'].clouds[0].zIndexMore]]"
+          style="left: 72%;bottom:62.2%" ng-class="classes[10].clouds[0].visibleCloud">
+          <h5>N-Park</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[10].clouds[0].sizeCloud">ul. Trakt Brzeski
+            <br>Warszawa</div><a href="n-park-warszawa-15" target="_blank" ng-mouseover="showFullClouds('0','10')"
+            ng-mouseleave="hideFullClouds('0','10')"></a>
+        </div>
+        <div class="cloud hidden-cloud c-open-invest open-to-top [[classes[10].clouds[1].zIndexMore]]"
+          style="left: 72%;top:42%" ng-class="classes[10].clouds[1].visibleCloud">
+          <h5>Galeria Renova</h5>
+          <div class="address-cloud small-cloud" ng-class="classes[10].clouds[1].sizeCloud">ul. Rembielińska 20
+            <br>Warszawa</div><a href="galeria-renova-warszawa-3" target="_blank" ng-mouseover="showFullClouds(1,10)"
+            ng-mouseleave="hideFullClouds(1,10)"></a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
